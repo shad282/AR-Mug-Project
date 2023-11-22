@@ -17,27 +17,30 @@
     var userMediaConstraints = {
       audio: false,
       video: {
-        facingMode: 'environment',
+        facingMode: 'environment',  // Use the back-facing camera
         width: {
-          ideal: _this.parameters.sourceWidth,
-          // min: 1024,
-          // max: 1920
+          ideal: 1920,
         },
         height: {
-          ideal: _this.parameters.sourceHeight,
-          // min: 776,
-          // max: 1080
-        }
+          ideal: 1080,
+        },
       }
-    }
+    };
 
     // CUSTOM CODE START
-    var backCam2 = devices.filter(d => {
-      return d.label && d.label == "camera2 0, facing back";
-    })
-    if (backCam2.length) {
-      userMediaConstraints.video.deviceId = backCam2[0].deviceId
-    }
+    navigator.mediaDevices.enumerateDevices()
+      .then(devices => {
+        console.log(devices);  // Print information about available devices to the console for debugging
+
+        // Example: Find the back-facing camera by label
+        var backCam2 = devices.filter(d => d.label && d.label == "camera2 0, facing back");
+        if (backCam2.length) {
+          userMediaConstraints.video.deviceId = backCam2[0].deviceId;
+        }
+      })
+      .catch(err => {
+        console.error(err);
+      });
     // CUSTOM CODE END
   </script>
 
