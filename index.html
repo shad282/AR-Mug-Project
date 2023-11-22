@@ -20,7 +20,7 @@
     }
   </style>
   <script src="https://aframe.io/releases/0.8.0/aframe.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/ar.js@1.7.2/aframe/build/aframe-ar.js"></script>
+  <script src="https://cdn.rawgit.com/jeromeetienne/AR.js/1.6.0/aframe/build/aframe-ar.js"></script>
   <title>AR Example</title>
 </head>
 <body style='overflow: hidden;'>
@@ -62,4 +62,24 @@
         var randomPosition = generateRandomPosition(position);
         heart.setAttribute('geometry', 'primitive: heart; radius: 0.05');
         heart.setAttribute('material', 'color: red');
-  
+        heart.setAttribute('animation', {
+          property: 'position',
+          to: randomPosition,
+          dur: 2000,
+          easing: 'linear'
+        });
+
+        scene.appendChild(heart);
+      }
+    }
+
+    function generateRandomPosition(basePosition) {
+      var distance = 0.2; // distance from the base position
+      var x = basePosition.x + (Math.random() - 0.5) * distance;
+      var y = basePosition.y + (Math.random() - 0.5) * distance;
+      var z = basePosition.z + (Math.random() - 0.5) * distance;
+      return { x: x, y: y, z: z };
+    }
+  </script>
+</body>
+</html>
