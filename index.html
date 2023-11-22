@@ -19,6 +19,12 @@
       color: red;
       z-index: 1;
     }
+
+    a-scene {
+      position: absolute;
+      top: 0;
+      left: 0;
+    }
   </style>
   <script src="https://aframe.io/releases/0.8.0/aframe.min.js"></script>
   <script src="https://cdn.rawgit.com/jeromeetienne/AR.js/1.6.0/aframe/build/aframe-ar.js"></script>
@@ -34,7 +40,7 @@
       <a-entity
         geometry="primitive: circle; radius: 0.1"
         material="color: transparent; shader: flat"
-        position="0 0.2 0" <!-- Adjusted the position -->
+        position="0 0.2 0"
         text="value: ❤️; font: mozillavr"
         clickable
       ></a-entity>
