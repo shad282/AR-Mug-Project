@@ -17,6 +17,7 @@
       font-size: 24px;
       cursor: pointer;
       color: red;
+      z-index: 1;
     }
   </style>
   <script src="https://aframe.io/releases/0.8.0/aframe.min.js"></script>
@@ -27,17 +28,17 @@
   <a-scene embedded arjs='sourceType: webcam;'>
     <!-- Image entity -->
     <a-marker preset='hiro'>
-      <a-image src="7fe39b49-828c-49b8-b0d3-f5c3a9802798.jpg" position="0 1 0" rotation="-90 0 0" scale="1 1 1">
-        <!-- Heart Button -->
-        <a-entity
-          id="heart-button"
-          geometry="primitive: circle; radius: 0.1"
-          material="color: transparent; shader: flat"
-          position="0.5 0.5 0"
-          text="value: ❤️; font: mozillavr"
-          clickable
-        ></a-entity>
-      </a-image>
+      <a-image src="7fe39b49-828c-49b8-b0d3-f5c3a9802798.jpg" position="0 1 0" rotation="-90 0 0" scale="1 1 1"></a-image>
+
+      <!-- Heart Button -->
+      <a-entity
+        id="heart-button"
+        geometry="primitive: circle; radius: 0.1"
+        material="color: transparent; shader: flat"
+        position="0 0 0.01"
+        text="value: ❤️; font: mozillavr"
+        clickable
+      ></a-entity>
     </a-marker>
 
     <!-- Camera -->
