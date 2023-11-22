@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no" />
   <style>
     body {
       margin: 0;
@@ -17,7 +17,7 @@
     var userMediaConstraints = {
       audio: false,
       video: {
-        facingMode: 'environment',  // Use the back-facing camera
+        deviceId: { exact: 'camera0' },  // Use the main camera, adjust the label as needed
         width: {
           ideal: 1920,
         },
@@ -26,22 +26,6 @@
         },
       }
     };
-
-    // CUSTOM CODE START
-    navigator.mediaDevices.enumerateDevices()
-      .then(devices => {
-        console.log(devices);  // Print information about available devices to the console for debugging
-
-        // Example: Find the back-facing camera by label
-        var backCam2 = devices.filter(d => d.label && d.label == "camera2 0, facing back");
-        if (backCam2.length) {
-          userMediaConstraints.video.deviceId = backCam2[0].deviceId;
-        }
-      })
-      .catch(err => {
-        console.error(err);
-      });
-    // CUSTOM CODE END
   </script>
 
   <a-scene embedded arjs='sourceType: webcam;'>
