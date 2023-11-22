@@ -16,60 +16,13 @@
 <body>
   <a-scene embedded arjs='sourceType: webcam;'>
     <!-- Custom Marker -->
-    <a-marker type="pattern" url="https://raw.githubusercontent.com/shad282/AR-Mug-Project/main/pattern-marker%20(2).patt?v=1">
+    <a-marker type='pattern' url='https://raw.githubusercontent.com/shad282/AR-Mug-Project/main/pattern-marker%20(2).patt' emitevents="true">
       <!-- Image entity -->
       <a-image src="https://github.com/shad282/AR-Mug-Project/blob/d3e6d57e8c5924f8d7472865314fcf90a4da9742/7fe39b49-828c-49b8-b0d3-f5c3a9802798.jpg" position="0 1 0" rotation="-90 0 0" scale="1 1 1"></a-image>
-
-      <!-- Heart Button -->
-      <a-circle
-        material="color: red; opacity: 0.8"
-        position="0 0.2 0"
-        radius="0.1"
-        cursor-listener
-      ></a-circle>
     </a-marker>
 
     <!-- Camera -->
     <a-entity camera></a-entity>
   </a-scene>
-
-  <script>
-    AFRAME.registerComponent('cursor-listener', {
-      init: function () {
-        var el = this.el;
-        el.addEventListener('click', function () {
-          createFloatingHearts(el.object3D.position);
-        });
-      }
-    });
-
-    function createFloatingHearts(position) {
-      var scene = document.querySelector('a-scene');
-
-      for (var i = 0; i < 5; i++) {
-        var heart = document.createElement('a-circle');
-        var randomPosition = generateRandomPosition(position);
-        heart.setAttribute('material', 'color: red; opacity: 0.8');
-        heart.setAttribute('radius', '0.05');
-        heart.setAttribute('position', randomPosition);
-        heart.setAttribute('animation', {
-          property: 'position',
-          to: { x: position.x, y: position.y + 0.2, z: position.z },
-          dur: 2000,
-          easing: 'linear'
-        });
-
-        scene.appendChild(heart);
-      }
-    }
-
-    function generateRandomPosition(basePosition) {
-      var distance = 0.2; // distance from the base position
-      var x = basePosition.x + (Math.random() - 0.5) * distance;
-      var y = basePosition.y + (Math.random() - 0.5) * distance;
-      var z = basePosition.z + (Math.random() - 0.5) * distance;
-      return { x: x, y: y, z: z };
-    }
-  </script>
 </body>
 </html>
