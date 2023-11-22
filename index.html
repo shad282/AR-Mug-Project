@@ -6,52 +6,35 @@
   <style>
     body {
       margin: 0;
-    }
-
-    #heart-button {
-      position: absolute;
-      bottom: 10px;
-      right: 10px;
-      background-color: transparent;
-      border: none;
-      font-size: 24px;
-      cursor: pointer;
-      color: red;
-      z-index: 1;
-    }
-
-    a-scene {
-      position: absolute;
-      top: 0;
-      left: 0;
+      overflow: hidden;
     }
   </style>
   <script src="https://aframe.io/releases/0.8.0/aframe.min.js"></script>
   <script src="https://cdn.rawgit.com/jeromeetienne/AR.js/1.6.0/aframe/build/aframe-ar.js"></script>
-  <title>AR Example</title>
+  <title>AR Example with Custom Marker</title>
 </head>
-<body style='overflow: hidden;'>
+<body>
   <a-scene embedded arjs='sourceType: webcam;'>
-    <!-- Image entity -->
-    <a-marker preset='hiro'>
-      <a-image src="7fe39b49-828c-49b8-b0d3-f5c3a9802798.jpg" position="0 1 0" rotation="-90 0 0" scale="1 1 1"></a-image>
+    <!-- Custom Marker -->
+    <a-marker type="pattern" url="https://raw.githubusercontent.com/shad282/AR-Mug-Project/main/pattern-marker%20(2).patt">
+      <!-- Image entity -->
+      <a-image src="https://github.com/shad282/AR-Mug-Project/blob/d3e6d57e8c5924f8d7472865314fcf90a4da9742/7fe39b49-828c-49b8-b0d3-f5c3a9802798.jpg" position="0 1 0" rotation="-90 0 0" scale="1 1 1"></a-image>
 
       <!-- Heart Button -->
-      <a-entity
-        geometry="primitive: circle; radius: 0.1"
-        material="color: transparent; shader: flat"
+      <a-circle
+        material="color: red; opacity: 0.8"
         position="0 0.2 0"
-        text="value: ❤️; font: mozillavr"
-        clickable
-      ></a-entity>
+        radius="0.1"
+        cursor-listener
+      ></a-circle>
     </a-marker>
 
     <!-- Camera -->
-    <a-entity camera fov="80"></a-entity> <!-- Adjust the FOV as needed -->
+    <a-entity camera></a-entity>
   </a-scene>
 
   <script>
-    AFRAME.registerComponent('clickable', {
+    AFRAME.registerComponent('cursor-listener', {
       init: function () {
         var el = this.el;
         el.addEventListener('click', function () {
@@ -64,13 +47,14 @@
       var scene = document.querySelector('a-scene');
 
       for (var i = 0; i < 5; i++) {
-        var heart = document.createElement('a-entity');
+        var heart = document.createElement('a-circle');
         var randomPosition = generateRandomPosition(position);
-        heart.setAttribute('geometry', 'primitive: heart; radius: 0.05');
-        heart.setAttribute('material', 'color: red');
+        heart.setAttribute('material', 'color: red; opacity: 0.8');
+        heart.setAttribute('radius', '0.05');
+        heart.setAttribute('position', randomPosition);
         heart.setAttribute('animation', {
           property: 'position',
-          to: randomPosition,
+          to: { x: position.x, y: position.y + 0.2, z: position.z },
           dur: 2000,
           easing: 'linear'
         });
