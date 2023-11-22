@@ -7,6 +7,17 @@
     body {
       margin: 0;
     }
+
+    #heart-button {
+      position: absolute;
+      bottom: 10px;
+      right: 10px;
+      background-color: transparent;
+      border: none;
+      font-size: 24px;
+      cursor: pointer;
+      color: red;
+    }
   </style>
   <script src="https://aframe.io/releases/0.8.0/aframe.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/ar.js@1.7.2/aframe/build/aframe-ar.js"></script>
@@ -16,11 +27,39 @@
   <a-scene embedded arjs='sourceType: webcam;'>
     <!-- Image entity -->
     <a-marker preset='hiro'>
-      <a-image src="7fe39b49-828c-49b8-b0d3-f5c3a9802798.jpg" position="0 1 0" rotation="-90 0 0" scale="1 1 1"></a-image>
+      <a-image src="7fe39b49-828c-49b8-b0d3-f5c3a9802798.jpg" position="0 1 0" rotation="-90 0 0" scale="1 1 1">
+        <!-- Heart Button -->
+        <a-entity
+          id="heart-button"
+          geometry="primitive: circle; radius: 0.1"
+          material="color: transparent; shader: flat"
+          position="0.5 0.5 0"
+          text="value: ❤️; font: mozillavr"
+          clickable
+        ></a-entity>
+      </a-image>
     </a-marker>
 
     <!-- Camera -->
     <a-entity camera fov="80"></a-entity> <!-- Adjust the FOV as needed -->
   </a-scene>
-</body>
-</html>
+
+  <script>
+    AFRAME.registerComponent('clickable', {
+      init: function () {
+        var el = this.el;
+        el.addEventListener('click', function () {
+          createFloatingHearts(el.object3D.position);
+        });
+      }
+    });
+
+    function createFloatingHearts(position) {
+      var scene = document.querySelector('a-scene');
+
+      for (var i = 0; i < 5; i++) {
+        var heart = document.createElement('a-entity');
+        var randomPosition = generateRandomPosition(position);
+        heart.setAttribute('geometry', 'primitive: heart; radius: 0.05');
+        heart.setAttribute('material', 'color: red');
+  
