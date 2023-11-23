@@ -10,23 +10,14 @@
   <!-- Use CDN for A-Frame AR.js -->
   <script src="https://cdn.jsdelivr.net/npm/ar.js@2.3.0/aframe/build/aframe-ar.js"></script>
 
-  <!-- Use CDN for Three.js and handle it as a global variable -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-  <script>
-    window.THREE = AFRAME.THREE;
-  </script>
-
-  <!-- Use CDN URL for AR-threex -->
-  <script src="https://raw.githack.com/AR-js-org/AR.js/master/three.js/build/ar-threex.js"></script>
-  
-  <title>AR Example with Three.js Image Tracking</title>
+  <title>AR Example with Image Pattern Tracking</title>
 </head>
 <body>
   <a-scene embedded arjs='sourceType: webcam;'>
-    <!-- Use a-marker-camera for image tracking with the specified marker image -->
-    <a-marker-camera type='barcode' url="7fe39b49-828c-49b8-b0d3-f5c3a9802798.jpg">
+    <!-- Use a-marker-camera for image pattern tracking with the specified pattern file -->
+    <a-marker-camera type='pattern' url="https://raw.githubusercontent.com/shad282/AR-Mug-Project/main/pattern-Asset%202AR2.patt">
       <!-- AR content -->
-      <a-image src="7fe39b49-828c-49b8-b0d3-f5c3a9802798.jpg" position="0 1 0" scale="1 1 1"></a-image>
+      <a-image src="https://raw.githubusercontent.com/shad282/AR-Mug-Project/d3e6d57e8c5924f8d7472865314fcf90a4da9742/7fe39b49-828c-49b8-b0d3-f5c3a9802798.jpg" position="0 1 0" scale="1 1 1"></a-image>
     </a-marker-camera>
 
     <!-- Camera -->
