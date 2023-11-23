@@ -4,18 +4,21 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <!-- Include the Wikitude SDK -->
-  <script src="https://cdn.wikitude.com/sdk/8.10.0/wikitude-sdk-aframe.js"></script>
+  <!-- Use CDN for A-Frame -->
+  <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
+
+  <!-- Use CDN for A-Frame AR.js -->
+  <script src="https://cdn.jsdelivr.net/npm/ar.js@2.3.2/aframe/build/aframe-ar.js"></script>
 
   <title>AR Example with Image Tracking</title>
 </head>
 <body>
   <a-scene embedded arjs='sourceType: webcam;'>
-    <!-- Use a-marker-wikitude for image tracking with the specified target image -->
-    <a-marker-wikitude type='image' url="7fe39b49-828c-49b8-b0d3-f5c3a9802798.jpg">
+    <!-- Use a-marker-camera for image tracking with the specified pattern file -->
+    <a-marker-camera type='pattern' url="https://raw.githubusercontent.com/shad282/AR-Mug-Project/main/pattern-test33.patt">
       <!-- AR content -->
-      <a-image src="https://github.com/shad282/AR-Mug-Project/blob/710e7bb9965a0ff7f2300b09fa445bfdcb98f554/7fe39b49-828c-49b8-b0d3-f5c3a9802798.jpg" position="0 1 0" scale="1 1 1"></a-image>
-    </a-marker-wikitude>
+      <a-image src="7fe39b49-828c-49b8-b0d3-f5c3a9802798.jpg" position="0 1 0" scale="1 1 1"></a-image>
+    </a-marker-camera>
 
     <!-- Camera -->
     <a-entity camera></a-entity>
